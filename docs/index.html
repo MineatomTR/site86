@@ -1,276 +1,705 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Site-86</title>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self';" />
-    <link rel="stylesheet" href="style.css">
+    <title>Site-86</title>
     <script src="script.js" defer></script>
-</head> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    /* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Root variables */
+:root {
+    --background-color: #1e1e2e;
+    --text-color: #cdd6f4;
+    --accent-color: #89dceb;
+    --secondary-accent: #f5c2e7;
+    --card-background: rgba(49, 50, 68, 0.6);
+    --header-background: rgba(30, 30, 46, 0.9);
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: var(--accent-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.8rem; }
+h3 { font-size: 2rem; }
+
+p { margin-bottom: 15px; }
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover { color: var(--secondary-accent); }
+
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    background-color: var(--header-background);
+    padding: 15px 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li { margin-left: 30px; }
+
+nav ul li a {
+    color: var(--text-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover { color: var(--accent-color); }
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(45deg, var(--background-color), #2c3e50);
+    text-align: center;
+    padding: 50px 0;
+}
+
+.server-info {
+    margin: 30px 0;
+    font-size: 1.2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--secondary-accent);
+    color: var(--background-color);
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+/* Perk Sections */
+.perks {
+    margin-bottom: 80px;
+}
+
+.perk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    align-items: start; /* Align items to the start of the grid cell */
+}
+
+.perk-toggle:hover:focus {
+    outline: none;
+}
+
+/* Perk card styles */
+.perk-card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.perk-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.perk-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.perk-header i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.perk-header h3 {
+    flex-grow: 1;
+    margin: 0;
+}
+
+.perk-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    position: relative;
+}
+
+.perk-toggle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.perk-toggle i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.perk-toggle:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.perk-toggle:hover::before {
+    opacity: 1;
+}
+.perk-card.expanded {
+    height: auto; /* Allow expansion when clicked */
+}
+
+.perk-card.expanded .perk-toggle {
+    transform: rotate(180deg);
+}
+
+.perk-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.perk-card.expanded .perk-content {
+    max-height: 1000px;
+    padding: 0 15px 15px;
+}
+
+
+.perk-content p,
+.perk-details,
+.perk-details ul {
+    margin: 15px 0 0;
+    padding: 0;
+    list-style-position: inside;
+}
+
+.perk-details ul li {
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 50px 0;
+    margin-top: 80px;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-column:last-child { margin-right: 0; }
+
+.social-links a {
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body { font-size: 16px; }
+
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    nav.active { display: block; }
+
+    nav ul { flex-direction: column; }
+
+    nav ul li { margin: 10px 0; }
+
+    .hamburger {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .footer-column {
+        flex: 100%;
+        margin-right: 0;
+    }
+
+    .perk-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+}
+
+/* Accessibility */
+:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: #fff;
+        color: #000;
+    }
+
+    header, footer, .cta-button { display: none; }
+
+    .container {
+        width: 100%;
+        max-width: none;
+    }
+}
+    </style>
+</head>
 <body>
-    <nav>
-  
-        <ul>
-            <li><a href="#info" class="active"><strong>Information</strong></a></li>
-            <li><a href="#classdstats" class="active"><strong>Class-D Perks</strong></a></li>
-            <li><a href="#mtfstats"><strong>MTF Perks</strong></a></li>
-            <li style="margin-top: auto;"><a href="#about"><strong>About</strong></a></li>
-        </ul>
-        
-    </nav>
-    <section id="info" class="active-section">
+    <header>
+        <div class="container">
+            <div class="logo">Site-86</div>
+            <nav>
+                <ul>
+                    <li><a href="#info">Information</a></li>
+                    <li><a href="#classd">Class-D Perks</a></li>
+                    <li><a href="#mtf">MTF Perks</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
 
-        
-
-        <h2>Information</h2>
-        <hr>
-        <p>Site-86 is is a team deathmatch with a twist, consisting of unique roles; Class-D, Chaos Insurgency, Facility Guards, Mobile Task Forces and SCPs. Work with your team and leverage your power further to outwit your opponents.</p>
-        <br>
-        <br>
-        <p>Server IP: AtomBack.aternos.me</p>
-        <p>MC Version: 1.20.6 and above</p>
-        <br>
-        <p><a href="https://buymeacoffee.com/mineatom/membership">Buy a membership here for trails and XP boost.</a></p>
-        </section>
-        <section id="classdstats">
-          <h2>Class-D Perks</h2>
-        
-          <hr>
-          <h3>Medic</h3>
-          <p>Medics can help both themselves and their teammates recover instantly from rough encounters, with the use of their MediBomb.</p>
-          <br>
-          <p><strong>Utility:</strong></p>
-          <ul>
-            <li>
-          MediBomb; effects the user and Class-Ds in its radius with regeneration.
-            </li>
-            <li>x2 Medic Bag; regenerates 8 hearts upon drinking the potion.</li>
-        </ul> 
-          <br>
-          <table>
-            <caption>
-              <i>MediBomb stats</i>
-            </caption>
-              <tr>
-                <th>Duration - </th>
-                <td> 10 seconds</td>
-              </tr>
-              <th>Cooldown - </th>
-              <td> 40 seconds</td>
-              <tr>
-              <th>Radius - </th>
-              <td> 5 blocks</td>
-              </tr>
-            </table>
-  
-            <br>
-            <hr>
-            
-            <h3>Painkiller</h3>
-            <p>Painkiller is the go-to perk if you're looking to save your teammates from dire situations with its extra health and Ibuprofen Spray.</p>
-            <br>
-          <p><strong>Utility:</strong></p>
-          <ul>
-            <li>
-          Ibuprofen Spray; Renders Class-Ds in its radius, <strong>excluding</strong> the user, invulnerable. And it will affect the user with glowing when deployed.
-            </li>
-            <li>High Dosage Painkiller; provides 8 hearts of absorbtion for 45 seconds upon drinking the potion.</li>
-          </ul>
-            <br>
-            <table>
-              <caption>
-                <i>Ibuprofen Spray stats</i>
-              </caption>
-                <tr>
-                  <th>Glowing Duration - </th>
-                  <td> 10 seconds</td>
-                </tr>
-                <tr>
-                <th>Invulnerability Duration - </th>
-                <td> 15 seconds</td>
-                </tr>
-                <tr>
-                <th>Radius - </th>
-                <td> 5 blocks</td>
-                </tr>
-                <tr>
-                <th>Cooldown - </th>
-                <td> 40 seconds</td>
-                </tr>
-                <tr>
-                <th>Base health - </th>
-                <td> 24 HP</td>
-                </tr>
-            </table>
-            <br>
-            <hr>
-  
-            <h3>Exposer</h3>
-            <p>Looking for ways to avoid the MTF altogether? The Exposer will allow you to do just that and more, by revealing their location.</p>
-            <br>
-            <p><strong>Utility:</strong> The Exposer; speeds you up, blinds nearby enemies and exposes them.</p>
-            <br>
-            <table>
-              <tr>
-                <th>Range - </th>
-                <td> 5 blocks</td>
-              </tr>
-              <th>Blindness Duration - </th>
-              <td> 3 seconds</td>
-              <tr>
-                <th>Speed Duration - </th>
-              <td> 7 seconds</td>
-              </tr>
-              <tr>
-                <th>Cooldown - </th>
-              <td> 60 seconds</td>
-              </tr>
-            </table>
-            <br>
-            <hr>
-  
-            <h3>Speed-o</h3>
-            <p>You'll be.. speedy, with Speed-o. If you're good at avoiding damage, you'll escape in no time with this perk.</p>
-            <br>
-            <p><strong>Utility:</strong> x2 Energy Drink; increases your movement speed by <strong>40%</strong> for <strong>12 seconds</strong>. However, it will affect its user with glowing for <strong>5 seconds</strong> along with it.</p>
-            <br>
-            <table>
-              <tr>
-                <th>Base movement speed - </th>
-                <td> +10%</td>
-              </tr>
-              <tr>
-                <th>Base health - </th>
-                <td> 16 HP</td>
-              </tr>
-            </table>
-            <br>
-            <hr>
-            <h3>Utility Master</h3>
-            <p>The Utility Master is all about supporting their team and stalling the enemy, equipped with a variety of tools to their advantage.</p>
-            <br>
-            <p><strong>Utility:</strong></p>
-            <ul>
-              <li>
-                Adrenaline Bomb; speeds up whoever in its radius by 40% for 45 seconds.
-              </li>
-              <li>x2 Molotov; will set wherever it's thrown on fire, dealing significant damage to enemies caught in it, or whoever dares to go through it.</li>
-              <li>x2 Smoke Grenade; when thrown, it will blind players next to it on impact and create a cloud of smoke that breaks the line of sight.</li>
-          </ul> 
-            
-            <br>
-        
-        </section>
-    <section id="mtfstats">
-        <h2>MTF Perks</h2>
-        
-        <hr>
-        <h3>Shotgunner</h3>
-        <p>Shotgunner is equipped with a FP6 shotgun. With its multishot property, it is able to easily hit multiple targets up close and terminate them quickly if shot consecutively. If you take too long between shots on your target however, you will end up dealing much lower damage.</p>
-        <br>
-        <p><strong>Utility:</strong> Gas grenade; used to make it more inconvenient for Class-D and SCPs to pass through areas you don't want them going through.</p>
-        <br>
-        <table>
-            <tr>
-              <th>Ammo Count - </th>
-              <td> 24 bullets</td>
-            </tr>
-            <th>Reload Speed - </th>
-            <td> 1 second</td>
-            <tr>
-            </tr>
-          </table>
-
-          <br>
-          <hr>
-          
-          <h3>Scout</h3>
-          <p>Scout is equipped with a MP5 submachine gun. With its extremely fast fire rate and large quantity of ammunition, you can easily overwhelm and suppress your targets. The MP5 has weaker firepower compared to other guns, and targets will regenerate most of their health if they manage to flee.</p>
-          <br>
-          <table>
-            <tr>
-              <th>Ammo Count - </th>
-              <td> 90 bullets</td>
-            </tr>
-            <th>Reload Speed - </th>
-            <td> instant</td>
-            <tr>
-            </tr>
-          </table>
-          <br>
-          <hr>
-
-          <h3>Sniper</h3>
-          <p>Sniper is equipped with SSG 08 bolt action sniper rifle. It may have a slow fire rate, but it hits like a truck. Targets will be stunned when hit, and will take way longer to recover their health compared to when hit with other guns.</p>
-          <br>
-          <p><strong>Utility:</strong> Spyglass, allows you to zoom and see better at range. Or you could just use optifine I guess...</p>
-          <br>
-          <table>
-            <tr>
-              <th>Ammo Count - </th>
-              <td> 20 bullets</td>
-            </tr>
-            <th>Reload Speed - </th>
-            <td> 1.25 seconds</td>
-            <tr>
-              <th>Stun Duration - </th>
-            <td> 1.25 seconds</td>
-            </tr>
-          </table>
-          <br>
-          <hr>
-
-          <h3>Infiltrator</h3>
-          <p>Equipped with the standard M1911 handgun, The Infiltrator supports their team by exposing locations of Class-Ds and SCPs.</p>
-          <br>
-          <p><strong>Utility:</strong> The Observer; reveals SCPs and Class-Ds for <strong>40 seconds</strong> or until they crouch for <strong>3 seconds</strong>. <strong>60 seconds cooldown.</strong></p>
-          <br>
-          <table>
-            <tr>
-              <th>Ammo Count - </th>
-              <td> 27 bullets</td>
-            </tr>
-            <th>Reload Speed - </th>
-            <td> 0.75 seconds</td>
-            <tr>
-            </tr>   
-          </table>
-          <br>
-          <hr>
-          <h3>Quake Pro</h3>
-          <p>Quake Pro is equipped with the standard M1911 handgun. What's special about the Quake Pro however, is their speed. Once you catch up to your target, you can be sure that they will not be getting away any time soon.</p>
-          <br>
-          <p><strong>Utility:</strong> Adrenaline Bomb; speeds up whoever in its radius by 40% for 45 seconds.</p>
-          <br>
-          <table>
-            <tr>
-              <th>Ammo Count - </th>
-              <td> 18 bullets</td>
-            </tr>
-            <th>Reload Speed - </th>
-            <td> 0.75 seconds</td>
-            <tr>
-            <th>Movement Speed - </th>
-            <td> +10%</td>
-            </tr>
-          </table>
-          <br>
+    <main>
+        <section id="info" class="hero">
+            <div class="container">
+                <h1>Site-86</h1>
+                <p>A team deathmatch with a twist, featuring unique roles and exciting gameplay.</p>
+                <div class="server-info">
+                    <p><strong>Server IP:</strong> AtomBack.aternos.me</p>
+                    <p><strong>MC Version:</strong> 1.20.6 and above</p>
+                </div>
+                <a href="https://buymeacoffee.com/mineatom/membership" class="cta-button">Buy Membership</a>
+            </div>
         </section>
 
-    <section id="about">
-        <h2>About</h2>
-        <hr>
-        <p>This website is <a href="https://github.com/MineatomTR/site86web?">open source</a>. You're free to contribute or make your own website by usings ours as a template.</p>
-        <p>Created by Mineatom and theia</p>
-        <br>
-        <p>Join our socials to follow the development!</p>
-        <iframe scrolling="no" id="discWidget" src="https://discord.com/widget?id=522887728191242251&theme=dark" width="500" height="600" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        <!-- Class-D Perks -->
+        <section id="classd" class="perks">
+            <div class="container">
+                <h2>Class-D Perks</h2>
+                <div class="perk-grid">
+                    <div class="perk-card" data-perk="medic">
+                        <div class="perk-header">
+                            <i class="fas fa-first-aid" style="color: #ff6b6b;"></i>
+                            <h3>Medic</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>Instant recovery for you and your teammates.</p>
+                            <div class="perk-details">
+                                <h4>Utility:</h4>
+                                <ul>
+                                    <li>MediBomb: Affects the user and Class-Ds in its radius with regeneration.</li>
+                                    <li>x2 Medic Bag: Regenerates 8 hearts upon drinking the potion.</li>
+                                </ul>
+                                <h4>MediBomb Stats:</h4>
+                                <ul>
+                                    <li>Duration: 10 seconds</li>
+                                    <li>Cooldown: 40 seconds</li>
+                                    <li>Radius: 5 blocks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
         
-    </section>
+                    <div class="perk-card" data-perk="painkiller">
+                        <div class="perk-header">
+                            <i class="fas fa-pills" style="color: #6a89cc;"></i>
+                            <h3>Painkiller</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>Extra health and temporary invulnerability.</p>
+                            <div class="perk-details">
+                                <h4>Utility:</h4>
+                                <ul>
+                                    <li>Ibuprofen Spray: Renders Class-Ds in its radius invulnerable, excluding the user. Affects the user with glowing when deployed.</li>
+                                    <li>High Dosage Painkiller: Provides 8 hearts of absorption for 45 seconds upon drinking the potion.</li>
+                                </ul>
+                                <h4>Ibuprofen Spray Stats:</h4>
+                                <ul>
+                                    <li>Glowing Duration: 10 seconds</li>
+                                    <li>Invulnerability Duration: 15 seconds</li>
+                                    <li>Radius: 5 blocks</li>
+                                    <li>Cooldown: 40 seconds</li>
+                                    <li>Base health: 24 HP</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="perk-card" data-perk="exposer">
+                        <div class="perk-header">
+                            <i class="fas fa-eye" style="color: #feca57;"></i>
+                            <h3>Exposer</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>Reveal enemy locations and gain speed boost.</p>
+                            <div class="perk-details">
+                                <h4>Utility:</h4>
+                                <p>The Exposer: Speeds you up, blinds nearby enemies, and exposes them.</p>
+                                <h4>Stats:</h4>
+                                <ul>
+                                    <li>Range: 5 blocks</li>
+                                    <li>Blindness Duration: 3 seconds</li>
+                                    <li>Speed Duration: 7 seconds</li>
+                                    <li>Cooldown: 60 seconds</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="perk-card" data-perk="speedo">
+                        <div class="perk-header">
+                            <i class="fas fa-bolt" style="color: #54a0ff;"></i>
+                            <h3>Speed-o</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>Increased movement speed and energy drinks.</p>
+                            <div class="perk-details">
+                                <h4>Utility:</h4>
+                                <p>x2 Energy Drink: Increases movement speed by 40% for 12 seconds. Affects the user with glowing for 5 seconds.</p>
+                                <h4>Stats:</h4>
+                                <ul>
+                                    <li>Base movement speed: +10%</li>
+                                    <li>Base health: 16 HP</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="perk-card" data-perk="utilitymaster">
+                        <div class="perk-header">
+                            <i class="fas fa-toolbox" style="color: #5f27cd;"></i>
+                            <h3>Utility Master</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>Various tools to support team and stall enemies.</p>
+                            <div class="perk-details">
+                                <h4>Utility:</h4>
+                                <ul>
+                                    <li>Adrenaline Bomb: Speeds up players in its radius by 40% for 45 seconds.</li>
+                                    <li>x2 Molotov: Sets the thrown area on fire, dealing significant damage to enemies caught in it or passing through.</li>
+                                    <li>x2 Smoke Grenade: Blinds players near impact and creates a smoke cloud that breaks line of sight.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- MTF Perks -->
+        <section id="mtf" class="perks">
+            <div class="container">
+                <h2>MTF Perks</h2>
+                <div class="perk-grid">
+                    <div class="perk-card" data-perk="shotgunner">
+                        <div class="perk-header">
+                            <i class="fas fa-bullseye" style="color: #ff4757;"></i>
+                            <h3>Shotgunner</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>FP6 shotgun for close-range termination.</p>
+                            <div class="perk-details">
+                                <p>Equipped with a FP6 shotgun. Multishot property allows hitting multiple targets up close. Consecutive shots deal high damage.</p>
+                                <h4>Utility:</h4>
+                                <p>Gas grenade: Makes areas inconvenient for Class-D and SCPs to pass through.</p>
+                                <h4>Stats:</h4>
+                                <ul>
+                                    <li>Ammo Count: 24 bullets</li>
+                                    <li>Reload Speed: 1 second</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="perk-card" data-perk="scout">
+                        <div class="perk-header">
+                            <i class="fas fa-running" style="color: #2ed573;"></i>
+                            <h3>Scout</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>MP5 submachine gun for suppression.</p>
+                            <div class="perk-details">
+                                <p>Equipped with a MP5 submachine gun. Extremely fast fire rate and large ammunition quantity for overwhelming targets.</p>
+                                <h4>Stats:</h4>
+                                <ul>
+                                    <li>Ammo Count: 90 bullets</li>
+                                    <li>Reload Speed: instant</li>
+                                </ul>
+                                <p>Note: Weaker firepower compared to other guns. Targets regenerate most health if they flee.</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="perk-card" data-perk="sniper">
+                        <div class="perk-header">
+                            <i class="fas fa-crosshairs" style="color: #5352ed;"></i>
+                            <h3>Sniper</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>SSG 08 bolt action rifle for long-range combat.</p>
+                            <div class="perk-details">
+                                <p>Equipped with SSG 08 bolt action sniper rifle. Slow fire rate but high damage.</p>
+                                <h4>Utility:</h4>
+                                <p>Spyglass: Allows zooming for better long-range vision.</p>
+                                <h4>Stats:</h4>
+                                <ul>
+                                    <li>Ammo Count: 20 bullets</li>
+                                    <li>Reload Speed: 1.25 seconds</li>
+                                    <li>Stun Duration: 1.25 seconds</li>
+                                </ul>
+                                <p>Note: Targets are stunned when hit and take longer to recover health compared to other guns.</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="perk-card" data-perk="infiltrator">
+                        <div class="perk-header">
+                            <i class="fas fa-user-secret" style="color: #ff6b6b;"></i>
+                            <h3>Infiltrator</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>M1911 handgun and enemy-revealing ability.</p>
+                            <div class="perk-details">
+                                <p>Equipped with the standard M1911 handgun. Supports the team by exposing locations of Class-Ds and SCPs.</p>
+                                <h4>Utility:</h4>
+                                <p>The Observer: Reveals SCPs and Class-Ds for 40 seconds or until they crouch for 3 seconds. 60 seconds cooldown.</p>
+                                <h4>Stats:</h4>
+                                <ul>
+                                    <li>Ammo Count: 27 bullets</li>
+                                    <li>Reload Speed: 0.75 seconds</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="perk-card" data-perk="quakepro">
+                        <div class="perk-header">
+                            <i class="fas fa-tachometer-alt" style="color: #ff9ff3;"></i>
+                            <h3>Quake Pro</h3>
+                            <button class="perk-toggle" aria-label="Toggle details">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="perk-content">
+                            <p>M1911 handgun with enhanced speed.</p>
+                            <div class="perk-details">
+                                <p>Equipped with the standard M1911 handgun. Features enhanced speed for quick target engagement.</p>
+                                <h4>Utility:</h4>
+                                <p>Adrenaline Bomb: Speeds up players in its radius by 40% for 45 seconds.</p>
+                                <h4>Stats:</h4>
+                                <ul>
+                                    <li>Ammo Count: 18 bullets</li>
+                                    <li>Reload Speed: 0.75 seconds</li>
+                                    <li>Movement Speed: +10%</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer id="about">
+        <div class="container">
+            <div class="footer-column">
+                <h3>About Site-86</h3>
+                <p>This website is open source. Feel free to contribute or use it as a template for your own projects.</p>
+                <p>Website by datheia</p>
+                <p>Site-86, the map, created by Mineatom and datheia</p>
+                <a href="https://github.com/MineatomTR/site86web" target="_blank">GitHub Repository</a>
+            </div>
+            <div class="footer-column">
+                <h3>Join Our Community</h3>
+                <iframe src="https://discord.com/widget?id=522887728191242251&theme=dark" width="300" height="300" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
-
-
-
